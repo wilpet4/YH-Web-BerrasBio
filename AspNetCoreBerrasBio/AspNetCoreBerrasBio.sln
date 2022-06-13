@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BerrasBio", "BerrasBio\BerrasBio.csproj", "{FE740B7C-ABB4-4D63-95F0-DB0D246DEB85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{D799085D-667A-4054-9382-C2DF1F462A62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{D799085D-667A-4054-9382-C2DF1F462A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{00E176BF-D73C-486E-B21C-DFDAD9A54F53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D799085D-667A-4054-9382-C2DF1F462A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D799085D-667A-4054-9382-C2DF1F462A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D799085D-667A-4054-9382-C2DF1F462A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00E176BF-D73C-486E-B21C-DFDAD9A54F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E176BF-D73C-486E-B21C-DFDAD9A54F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E176BF-D73C-486E-B21C-DFDAD9A54F53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00E176BF-D73C-486E-B21C-DFDAD9A54F53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

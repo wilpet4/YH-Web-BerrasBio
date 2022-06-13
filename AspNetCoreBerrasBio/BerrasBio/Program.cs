@@ -1,4 +1,5 @@
 
+using Core;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-DbSingleton.Instance.Database.Migrate();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -27,5 +27,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+#region Data Setup
+DbSingleton.Instance.Database.Migrate();
+Logic logic = new Logic();
+logic.GenerateSampleData();
+#endregion
 
 app.Run();
