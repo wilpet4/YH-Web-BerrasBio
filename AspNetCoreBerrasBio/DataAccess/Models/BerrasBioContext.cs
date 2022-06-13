@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace DataAccess.Models
 {
@@ -22,11 +24,12 @@ namespace DataAccess.Models
             .AddJsonFile($"appsettings.json", true, true);
 
             string connectionString =
-            builder.Build().GetConnectionString("DefaultConnection");
+            builder.Build().GetConnectionString("DefaultConnection"); // Returnerar null för nån jävla anledning.
 
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BerrasBio_WilliamPetrik;Integrated Security=True");
+                //optionsBuilder.UseSqlServer(connectionString);
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
