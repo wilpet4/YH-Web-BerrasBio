@@ -18,7 +18,7 @@ namespace BerrasBio.Pages
 
         public void OnGet()
         {
-            movies = logic.GetAllMovies();
+            movies = logic.GetAllMoviesAndRelationData();
         }
     }
 }

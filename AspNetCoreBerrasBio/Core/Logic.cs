@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core
 {
@@ -158,10 +159,10 @@ namespace Core
             db.SaveChanges();
             #endregion
         }
-        public List<Movie> GetAllMovies()
+        public List<Movie> GetAllMoviesAndRelationData()
         {
-            var query = from m in DbSingleton.Instance.Movies
-                        select m;
+            var query = (from m in DbSingleton.Instance.Movies
+                        select m).Include(g => g.Genres);
 
             return query.ToList();
         }

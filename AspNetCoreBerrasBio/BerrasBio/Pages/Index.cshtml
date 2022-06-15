@@ -14,12 +14,25 @@
                 <th>Movies</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="background-color: #f0f8ff">
             @foreach (var movie in Model.movies)
             {
-                <tr>
-                    <td>@movie.Name</td>
-                    <td><button type="button">click me</button></td>
+                <tr class=mv>
+                    <td>
+                        <button type="button">@movie.Name</button>
+                    </td>
+                </tr>
+                <tr class=expandable>
+                    <td>
+                    @foreach (var genre in @movie.Genres)
+                    {
+                        <text>@genre.GenreName  </text>
+                    }
+                    </td>
+                    <td>@movie.Runtime</td>
+                    <td>@movie.AgeRestriction</td>
+                    <td>@movie.Description</td>
+                    <td>@movie.Director</td>
                 </tr>
             }
         </tbody>
