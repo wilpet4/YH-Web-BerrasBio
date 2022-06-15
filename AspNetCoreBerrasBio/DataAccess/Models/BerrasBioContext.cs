@@ -18,6 +18,10 @@ namespace DataAccess.Models
         {
 
         }
+        public BerrasBioContext(DbContextOptions<BerrasBioContext> options) : base(options)
+        {
+
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder()

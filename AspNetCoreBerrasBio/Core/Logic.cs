@@ -158,5 +158,12 @@ namespace Core
             db.SaveChanges();
             #endregion
         }
+        public List<Movie> GetAllMovies()
+        {
+            var query = from m in DbSingleton.Instance.Movies
+                        select m;
+
+            return query.ToList();
+        }
     }
 }
