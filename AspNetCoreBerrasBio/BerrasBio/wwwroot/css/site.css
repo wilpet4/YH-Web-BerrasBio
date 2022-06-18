@@ -20,9 +20,29 @@ html {
 body {
   margin-bottom: 60px;
 }
-.mv {
 
+.mv {
+    
 }
+
 .expandable{
 
+}
+
+.mv button {
+    border-color: slategrey;
+    border-width: 4px;
+    background-color: #f0f8ff;
+    border-radius: 2px;
+    border-style: groove;
+    transition-duration: 0.2s;
+}
+
+.mv button:hover {
+    background-color: #d7ecff;
+}
+
+.mv .movie-name {
+    font-size: 18px;
+    font-style: oblique;
 }
