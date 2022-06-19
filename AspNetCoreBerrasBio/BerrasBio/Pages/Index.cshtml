@@ -17,16 +17,16 @@
             </tr>
         </thead>
         <tbody style="background-color: #f0f8ff">
-            @foreach (var movie in Model.movies)
+            @foreach (var screening in Model.screenings)
             {
                 <tr class="mv">
-                    <td class="movie-name">@movie.Name</td>
-                    <td>@foreach (var genre in movie.Genres)
+                    <td class="movie-name">@screening.Movie.Name</td>
+                    <td>@foreach (var genre in screening.Movie.Genres)
                         {
                             <text>@genre.GenreName </text>
                         }
                     </td>
-                    <td>@movie.AgeRestriction</td>
+                    <td>@screening.Movie.AgeRestriction</td>
                     <td><button type="button">Köp Biljett</button></td>
                 </tr>
             }

@@ -158,11 +158,75 @@ namespace Core
             });
             db.SaveChanges();
             #endregion
+            #region Screenings
+            db.Add(new Screening
+            {
+                ScreeningRoom = db.ScreeningRooms.First(),
+                Movie = db.Movies.Where(x => x.MovieId == 1).First(),
+                IsRecurring = true
+            });
+            db.Add(new Screening
+            {
+                ScreeningRoom = db.ScreeningRooms.First(),
+                Movie = db.Movies.Where(x => x.MovieId == 2).First(),
+                IsRecurring = true
+            });
+            db.Add(new Screening
+            {
+                ScreeningRoom = db.ScreeningRooms.First(),
+                Movie = db.Movies.Where(x => x.MovieId == 3).First(),
+                IsRecurring = true
+            });
+            db.Add(new Screening
+            {
+                ScreeningRoom = db.ScreeningRooms.First(),
+                Movie = db.Movies.Where(x => x.MovieId == 4).First(),
+                IsRecurring = true
+            });
+            db.Add(new Screening
+            {
+                ScreeningRoom = db.ScreeningRooms.First(),
+                Movie = db.Movies.Where(x => x.MovieId == 5).First(),
+                IsRecurring = true
+            });
+            db.Add(new Screening
+            {
+                ScreeningRoom = db.ScreeningRooms.First(),
+                Movie = db.Movies.Where(x => x.MovieId == 6).First(),
+                IsRecurring = true
+            });
+            db.Add(new Screening
+            {
+                ScreeningRoom = db.ScreeningRooms.First(),
+                Movie = db.Movies.Where(x => x.MovieId == 7).First(),
+                IsRecurring = true
+            });
+            db.Add(new Screening
+            {
+                ScreeningRoom = db.ScreeningRooms.First(),
+                Movie = db.Movies.Where(x => x.MovieId == 8).First(),
+                IsRecurring = true
+            });
+            db.Add(new Screening
+            {
+                ScreeningRoom = db.ScreeningRooms.First(),
+                Movie = db.Movies.Where(x => x.MovieId == 9).First(),
+                IsRecurring = true
+            });
+            db.SaveChanges();
+            #endregion
         }
-        public List<Movie> GetAllMoviesAndRelationData()
+        public List<Movie> GetAllMoviesWithRelationData()
         {
             var query = (from m in DbSingleton.Instance.Movies
                         select m).Include(g => g.Genres);
+
+            return query.ToList();
+        }
+        public List<Screening> GetAllScreeningsWithRelationData()
+        {
+            var query = (from s in DbSingleton.Instance.Screenings
+                         select s).Include(s => s.ScreeningRoom).Include(m => m.Movie).ThenInclude(g => g.Genres);
 
             return query.ToList();
         }

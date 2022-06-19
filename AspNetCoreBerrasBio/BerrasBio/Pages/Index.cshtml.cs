@@ -8,6 +8,7 @@ namespace BerrasBio.Pages
     public class IndexModel : PageModel
     {
         public List<Movie> movies;
+        public List<Screening> screenings;
         public Logic logic = new Logic();
         private readonly ILogger<IndexModel> _logger;
 
@@ -18,7 +19,8 @@ namespace BerrasBio.Pages
 
         public void OnGet()
         {
-            movies = logic.GetAllMoviesAndRelationData();
+            movies = logic.GetAllMoviesWithRelationData();
+            screenings = logic.GetAllScreeningsWithRelationData();
         }
     }
 }
