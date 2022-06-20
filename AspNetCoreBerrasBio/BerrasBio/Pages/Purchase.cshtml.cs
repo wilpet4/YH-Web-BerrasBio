@@ -7,6 +7,7 @@ namespace BerrasBio.Pages
     {
         public void OnGet()
         {
+
         }
     }
 }
