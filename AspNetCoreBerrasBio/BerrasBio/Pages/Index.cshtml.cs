@@ -9,6 +9,8 @@ namespace BerrasBio.Pages
     {
         public List<Movie> movies;
         public List<Screening> screenings;
+        [BindProperty]
+        public Screening Screening { get; set; }
         public Logic logic = new Logic();
         private readonly ILogger<IndexModel> _logger;
 
@@ -21,6 +23,10 @@ namespace BerrasBio.Pages
         {
             movies = logic.GetAllMoviesWithRelationData();
             screenings = logic.GetAllScreeningsWithRelationData();
+        }
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("./Purchase", Screening);
         }
     }
 }
