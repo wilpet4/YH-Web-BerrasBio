@@ -223,6 +223,10 @@ namespace Core
 
             return query.ToList();
         }
+        public Screening GetScreeningByIndex(in int index)
+        {
+            return (Screening)DbSingleton.Instance.Screenings.Include(x => x.Movie).ToList().First();
+        }
         public List<Screening> GetAllScreeningsWithRelationData()
         {
             var query = (from s in DbSingleton.Instance.Screenings

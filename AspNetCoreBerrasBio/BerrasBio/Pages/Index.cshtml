@@ -8,7 +8,8 @@
     <h1 class="display-4">Välkommen Till Berras Bio!</h1>
 </div>
 <div class="text-center">
-    <table class="table table-bordered">
+    <form method="post">    
+        <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Movies</th>
@@ -27,9 +28,11 @@
                         }
                     </td>
                     <td>@screening.Movie.AgeRestriction</td>
-                    <td><input type="hidden" asp-for="Screening" placeholder=@screening formmethod="post"/><button type="submit">Köp Biljett</button></td>
+                    <td><input type="hidden" asp-for="ScreeningId" placeholder=@screening.ScreeningId value=@screening.ScreeningId/><button type="submit">Köp Biljett</button></td>
                 </tr>
             }
         </tbody>
     </table>
+    </form>
+
 </div>

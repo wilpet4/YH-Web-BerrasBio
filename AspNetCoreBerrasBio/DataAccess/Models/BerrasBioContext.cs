@@ -32,8 +32,8 @@ namespace DataAccess.Models
 
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BerrasBio_WilliamPetrik;Integrated Security=True");
                 //optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BerrasBio_WilliamPetrik;Integrated Security=True");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
