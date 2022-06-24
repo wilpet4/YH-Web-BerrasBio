@@ -8,21 +8,24 @@ namespace BerrasBio.Pages
 {
     public class IndexModel : PageModel
     {
-        public List<Screening> screenings;
         [BindProperty]
         public ScreeningModel ScreeningModel { get; set; }
+
+        public List<Screening> screenings;
         public Logic logic = new Logic();
         private readonly ILogger<IndexModel> _logger;
+        private readonly BerrasBioContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, BerrasBioContext context)
         {
+            _context = context;
             _logger = logger;
             screenings = logic.GetAllScreeningsWithRelationData();
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return Page();
         }
         public IActionResult OnPost()
         {
