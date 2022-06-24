@@ -7,13 +7,12 @@ namespace BerrasBio.Pages
 {
     public class PurchaseModel : PageModel
     {
-        Logic logic = new Logic();
         [BindProperty(SupportsGet = true)]
         public int ScreeningId { get; set; }
-        public Screening screening;
-        public void OnGet(int ScreeningId)
+        Logic logic = new Logic();
+        public void OnGet()
         {
-            this.ScreeningId = ScreeningId;
+
         }
     }
 }

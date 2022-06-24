@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using BerrasBio.Models;
+using Core;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,7 +10,7 @@ namespace BerrasBio.Pages
     {
         public List<Screening> screenings;
         [BindProperty]
-        public int ScreeningId { get; set; }
+        public ScreeningModel ScreeningModel { get; set; }
         public Logic logic = new Logic();
         private readonly ILogger<IndexModel> _logger;
 
@@ -25,7 +26,7 @@ namespace BerrasBio.Pages
         }
         public IActionResult OnPost()
         {
-            return RedirectToPage("Purchase", new { ScreeningId }); // usch äckligt
+            return RedirectToPage("Purchase", new { ScreeningModel.ScreeningId }); // usch äckligt
         }
     }
 }

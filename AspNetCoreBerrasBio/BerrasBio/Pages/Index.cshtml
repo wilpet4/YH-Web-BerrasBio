@@ -1,14 +1,15 @@
 ﻿@page
+@using DataAccess.Models
 @model IndexModel
 @{
-    ViewData["Title"] = "Välkommen Till Berras Bio";
+    ViewData["Title"] = "Index";
 }
 
 <div class="text-center">
     <h1 class="display-4">Välkommen Till Berras Bio!</h1>
 </div>
-<div class="text-center">
-    <form method="post">    
+<div class="text-center"> 
+                            <form method="post">
         <table class="table table-bordered">
         <thead>
             <tr>
@@ -18,7 +19,7 @@
             </tr>
         </thead>
         <tbody style="background-color: #f0f8ff">
-            @foreach (var screening in Model.screenings)
+            @foreach (Screening screening in Model.screenings)
             {
                 <tr class="mv">
                     <td class="movie-name">@screening.Movie.Name</td>
@@ -28,11 +29,13 @@
                         }
                     </td>
                     <td>@screening.Movie.AgeRestriction</td>
-                    <td><input type="hidden" asp-for="ScreeningId" placeholder=@screening.ScreeningId value=@screening.ScreeningId/><button type="submit">Köp Biljett</button></td>
+                    <td>
+                                                    <input type="number" asp-for="ScreeningModel.ScreeningId" placeholder="@screening.ScreeningId"/>
+                            <button type="submit">Köp Biljett</button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
-    </form>
-
+                            </form>
 </div>
