@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using System.ComponentModel;
 
 namespace DataAccess.Models
 {
@@ -87,7 +88,7 @@ namespace DataAccess.Models
         public string Description { get; set; }
         public int Runtime { get; set; }
         public int AgeRestriction { get; set; }
-        public ICollection<Genre> Genres { get; set; } // ?
+        public ICollection<Genre> Genres { get; set; }
         public int DirectorId { get; set; }
         [Required] public Director Director { get; set; }
     }
@@ -99,6 +100,7 @@ namespace DataAccess.Models
         [Required] public ScreeningRoom ScreeningRoom { get; set; }
         public int MovieId { get; set; }
         [Required] public Movie Movie { get; set; }
+        [DefaultValue(129.99f)] public float Price { get; set; }
     }
     public class Genre
     {
@@ -108,7 +110,7 @@ namespace DataAccess.Models
         }
         public int GenreId { get; set; }
         public string GenreName { get; set; }
-        public ICollection<Movie> Movies { get; set; } // ?
+        public ICollection<Movie> Movies { get; set; }
     }
     public class Director
     {
@@ -119,5 +121,13 @@ namespace DataAccess.Models
         public int DirectorId { get; set; }
         [Required, MaxLength(70)] public string Name { get; set; }
         public ICollection<Movie> DirectedMovies { get; set;}
+    }
+    public class Receipt
+    {
+        public int ReceiptId { get; set; }
+        public int SeatId { get; set; }
+        [Required] public Seat Seat { get; set; }
+        public int ScreeningId { get; set; }
+        [Required] public Screening Screening { get; set; }
     }
 }
