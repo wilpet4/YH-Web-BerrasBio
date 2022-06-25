@@ -48,6 +48,7 @@ namespace DataAccess.Models
         public DbSet<Screening> Screenings { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Director> Directors { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
     }
     public class Cinema
     {
@@ -125,6 +126,7 @@ namespace DataAccess.Models
     public class Receipt
     {
         public int ReceiptId { get; set; }
+        public DateTime ReceiptDate { get; set; }
         public int SeatId { get; set; }
         [Required] public Seat Seat { get; set; }
         public int ScreeningId { get; set; }

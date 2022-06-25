@@ -234,5 +234,26 @@ namespace Core
 
             return query.ToList();
         }
+        public void PrintReceipt(in Screening screening, in Seat seat)
+        {
+            // ..\
+            string cleanDate = DateTime.Now.Date.ToString().Replace(':', '.');
+            Receipt receipt = new Receipt { Screening = screening, Seat = seat };
+            string fileName = $"{cleanDate}.{screening.ScreeningId}.{seat.SeatId}";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            if (Directory.Exists($@"{basePath}\Receipts"))
+            {
+                Directory.CreateDirectory($@"{basePath}\Receipts");
+            }
+            using (StreamWriter sw = File.CreateText($@"{basePath}\Receipts\{fileName}"))
+            {
+                sw.WriteLine($"Movie: {screening.Movie.Name}");
+                sw.WriteLine($"Room: {screening.ScreeningRoomId}");
+                sw.WriteLine($"Seat: {seat.SeatId}");
+                sw.WriteLine($"Date of Purchase: {cleanDate}");
+                sw.WriteLine($"Identification: {fileName}");
+            }
+                DbSingleton.Instance.Receipts.Add(receipt);
+        }
     }
 }
