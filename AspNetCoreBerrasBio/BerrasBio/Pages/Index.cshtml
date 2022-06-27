@@ -2,6 +2,7 @@
 @using DataAccess.Models
 @model IndexModel
 @{
+    List<string> genreNames = new List<string>();
     ViewData["Title"] = "Index";
 }
 
@@ -29,10 +30,20 @@
                     </td>
                     <td>@screening.Movie.AgeRestriction</td>
                     <td>
-                                                    <form method="post">
+                            <form method="post">
                             <input type="hidden" asp-for="ScreeningModel.ScreeningId" value="@screening.ScreeningId"/>
+                            <input type="hidden" asp-for="ScreeningModel.MovieName" value="@screening.Movie.Name"/>
+                            <input type="hidden" asp-for="ScreeningModel.Description" value="@screening.Movie.Description"/>
+                            <input type="hidden" asp-for="ScreeningModel.Runtime" value="@screening.Movie.Runtime"/>
+                            <input type="hidden" asp-for="ScreeningModel.AgeRestriction" value="@screening.Movie.AgeRestriction"/>
+                            @foreach (var genre in screening.Movie.Genres)
+                            {
+                                genreNames.Add(genre.GenreName);
+                            }
+                            <input type="hidden" asp-for="ScreeningModel.Genres" value="@genreNames"/>
+                            <input type="hidden" asp-for="ScreeningModel.DirectorName" value="@screening.Movie.Director.Name"/>
                             <button type="submit">Köp Biljett</button>
-                                                        </form>
+                            </form>
                     </td>
                 </tr>
             }

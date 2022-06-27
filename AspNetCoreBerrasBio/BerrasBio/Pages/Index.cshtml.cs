@@ -8,7 +8,7 @@ namespace BerrasBio.Pages
 {
     public class IndexModel : PageModel
     {
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public ScreeningModel ScreeningModel { get; set; }
 
         public List<Screening> screenings;
@@ -29,7 +29,7 @@ namespace BerrasBio.Pages
         }
         public IActionResult OnPost()
         {
-            return RedirectToPage("Purchase", new { ScreeningModel.ScreeningId }); // usch äckligt
+            return RedirectToPage("Purchase", ScreeningModel); // usch äckligt
         }
     }
 }

@@ -239,7 +239,7 @@ namespace Core
         public List<Screening> GetAllScreeningsWithRelationData()
         {
             var query = (from s in DbSingleton.Instance.Screenings
-                         select s).Include(s => s.ScreeningRoom).Include(m => m.Movie);
+                         select s).Include(s => s.ScreeningRoom) .Include(m => m.Movie).ThenInclude(g => g.Genres).Include(m => m.Movie).ThenInclude(d =>d.Director);
             if (query.Any() == false)
             {
                 return new List<Screening>();

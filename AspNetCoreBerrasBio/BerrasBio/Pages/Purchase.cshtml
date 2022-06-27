@@ -1,15 +1,24 @@
-﻿@page "{ScreeningId:int}"
+﻿@page
 @using Core
 @using DataAccess.Models
 @model PurchaseModel
 @{
-    Screening currentScreening = new Logic().GetScreeningByIndex(Model.ScreeningId);
     ViewData["Title"] = "Purchase";
 }
 <div class="text-center">
-    <h1 class="display-4">@Model.ScreeningId</h1>
+    <h1 class="display-4">@Model.ScreeningModel.ScreeningId</h1>
 </div>
 
 <div class="text-center">
-    <h2 class="text-left">@currentScreening.Movie.Name</h2>
+    <h2 class="text-left">@Model.ScreeningModel.MovieName</h2>
+    <h2 class="text-left">@Model.ScreeningModel.Description</h2>
+    <h2 class="text-left">@Model.ScreeningModel.Runtime</h2>
+    <h2 class="text-left">@Model.ScreeningModel.AgeRestriction</h2>
+    <h2 class="text-left">
+@for (var i = 0; i < Model.ScreeningModel.Genres.Count; i++)
+{
+    <text>@Model.ScreeningModel.Genres[i]</text> // FUNGERAR INTE
+}
+    </h2>
+    <h2 class="text-left">@Model.ScreeningModel.DirectorName</h2>
 </div>
