@@ -163,55 +163,64 @@ namespace Core
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 1).First(),
-                IsRecurring = true
+                IsRecurring = true,
+                Price = 129
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 2).First(),
-                IsRecurring = true
+                IsRecurring = true,
+                Price = 129
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 3).First(),
-                IsRecurring = true
+                IsRecurring = true,
+                Price = 129
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 4).First(),
-                IsRecurring = true
+                IsRecurring = true,
+                Price = 129
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 5).First(),
-                IsRecurring = true
+                IsRecurring = true,
+                Price = 129
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 6).First(),
-                IsRecurring = true
+                IsRecurring = true,
+                Price = 129
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 7).First(),
-                IsRecurring = true
+                IsRecurring = true,
+                Price = 129
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 8).First(),
-                IsRecurring = true
+                IsRecurring = true,
+                Price = 129
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 9).First(),
-                IsRecurring = true
+                IsRecurring = true,
+                Price = 129
             });
             db.SaveChanges();
             #endregion
@@ -230,16 +239,19 @@ namespace Core
         public List<Screening> GetAllScreeningsWithRelationData()
         {
             var query = (from s in DbSingleton.Instance.Screenings
-                         select s).Include(s => s.ScreeningRoom).Include(m => m.Movie).ThenInclude(g => g.Genres);
-
+                         select s).Include(s => s.ScreeningRoom).Include(m => m.Movie);
+            if (query.Any() == false)
+            {
+                return new List<Screening>();
+            }
             return query.ToList();
         }
         public void PrintReceipt(in Screening screening, in Seat seat)
         {
             // ..\
             string cleanDate = DateTime.Now.Date.ToString().Replace(':', '.');
-            Receipt receipt = new Receipt { Screening = screening, Seat = seat };
-            string fileName = $"{cleanDate}.{screening.ScreeningId}.{seat.SeatId}";
+            Receipt receipt = new Receipt { Screening = screening };
+            string fileName = $"{cleanDate}.{screening.ScreeningId}.{receipt.ReceiptId}";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             if (Directory.Exists($@"{basePath}\Receipts"))
             {
@@ -249,7 +261,6 @@ namespace Core
             {
                 sw.WriteLine($"Movie: {screening.Movie.Name}");
                 sw.WriteLine($"Room: {screening.ScreeningRoomId}");
-                sw.WriteLine($"Seat: {seat.SeatId}");
                 sw.WriteLine($"Date of Purchase: {cleanDate}");
                 sw.WriteLine($"Identification: {fileName}");
             }

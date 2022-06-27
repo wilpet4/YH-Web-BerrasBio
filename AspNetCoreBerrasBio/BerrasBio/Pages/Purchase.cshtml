@@ -1,8 +1,15 @@
 ﻿@page "{ScreeningId:int}"
+@using Core
+@using DataAccess.Models
 @model PurchaseModel
 @{
+    Screening currentScreening = new Logic().GetScreeningByIndex(Model.ScreeningId);
     ViewData["Title"] = "Purchase";
 }
 <div class="text-center">
     <h1 class="display-4">@Model.ScreeningId</h1>
+</div>
+
+<div class="text-center">
+    <h2 class="text-left">@currentScreening.Movie.Name</h2>
 </div>

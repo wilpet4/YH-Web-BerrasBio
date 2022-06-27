@@ -9,10 +9,11 @@ namespace BerrasBio.Pages
     {
         [BindProperty(SupportsGet = true)]
         public int ScreeningId { get; set; }
+        public Screening CurrentScreening { get; set; }
         Logic logic = new Logic();
-        public void OnGet()
+        public IActionResult OnGet(int screeningId)
         {
-
+            return Page();
         }
     }
 }
