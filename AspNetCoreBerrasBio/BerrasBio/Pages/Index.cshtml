@@ -36,7 +36,7 @@
                             <input type="hidden" asp-for="ScreeningModel.Description" value="@screening.Movie.Description"/>
                             <input type="hidden" asp-for="ScreeningModel.Runtime" value="@screening.Movie.Runtime"/>
                             <input type="hidden" asp-for="ScreeningModel.AgeRestriction" value="@screening.Movie.AgeRestriction"/>
-                            <input type="hidden" asp-for="ScreeningModel.Genres" value="@screening.Movie.Genres"/> <!-- FUNKAR INTE -->
+                            <input type="hidden" asp-for="ScreeningModel.Genres" value="@screening.GenresAsString"/>
                             <input type="hidden" asp-for="ScreeningModel.DirectorName" value="@screening.Movie.Director.Name"/>
                             <button type="submit">Köp Biljett</button>
                             </form>
