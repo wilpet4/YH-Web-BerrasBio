@@ -15,10 +15,10 @@
     <h2 class="text-left">@Model.ScreeningModel.Runtime</h2>
     <h2 class="text-left">@Model.ScreeningModel.AgeRestriction</h2>
     <h2 class="text-left">
-@for (var i = 0; i < Model.ScreeningModel.Genres.Count; i++)
-{
-    <text>@Model.ScreeningModel.Genres[i]</text> // FUNGERAR INTE
-}
+        @foreach (Genre genre in Model.ScreeningModel.Genres)
+        {
+            <text>@genre.GenreName </text>
+        }
     </h2>
     <h2 class="text-left">@Model.ScreeningModel.DirectorName</h2>
 </div>
