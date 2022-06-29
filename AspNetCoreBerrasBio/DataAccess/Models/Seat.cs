@@ -7,5 +7,6 @@ namespace DataAccess.Models
         public int SeatId { get; set; }
         public int ScreeningRoomId { get; set; }
         [Required] public ScreeningRoom ScreeningRoom { get; set; }
+        public bool IsOccupied { get; set; }
     }
 }

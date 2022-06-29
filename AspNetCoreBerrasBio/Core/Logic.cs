@@ -246,6 +246,14 @@ namespace Core
             }
             return query.ToList();
         }
+        public List<Seat> GetAllAvailableSeatsFromRoom(in ScreeningRoom room)
+        {
+            int roomId = room.ScreeningRoomId;
+            var query = (from s in DbSingleton.Instance.Seats
+                         where s.ScreeningRoomId == roomId && s.IsOccupied == false
+                         select s);
+            return query.ToList();
+        }
         public void PrintReceipt(in Screening screening, in Seat seat)
         {
             // ..\
@@ -253,18 +261,20 @@ namespace Core
             Receipt receipt = new Receipt { Screening = screening };
             string fileName = $"{cleanDate}.{screening.ScreeningId}.{receipt.ReceiptId}";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            if (Directory.Exists($@"{basePath}\Receipts"))
+            if (Directory.Exists($@"{basePath}\Receipts") == false)
             {
                 Directory.CreateDirectory($@"{basePath}\Receipts");
             }
-            using (StreamWriter sw = File.CreateText($@"{basePath}\Receipts\{fileName}"))
+            using (StreamWriter sw = File.CreateText($@"{basePath}\Receipts\{fileName}.txt"))
             {
                 sw.WriteLine($"Movie: {screening.Movie.Name}");
                 sw.WriteLine($"Room: {screening.ScreeningRoomId}");
                 sw.WriteLine($"Date of Purchase: {cleanDate}");
                 sw.WriteLine($"Identification: {fileName}");
             }
-                DbSingleton.Instance.Receipts.Add(receipt);
+            seat.IsOccupied = true;
+            DbSingleton.Instance.Receipts.Add(receipt);
+            DbSingleton.Instance.SaveChanges();
         }
     }
 }

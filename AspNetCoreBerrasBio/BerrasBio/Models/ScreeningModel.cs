@@ -11,5 +11,6 @@ namespace BerrasBio.Models
         public int AgeRestriction { get; set; }
         public string Genres { get; set; }
         public string DirectorName { get; set; }
+        public float Price { get; set; }
     }
 }

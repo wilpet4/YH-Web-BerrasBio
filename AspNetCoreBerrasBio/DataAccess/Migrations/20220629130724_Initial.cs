@@ -97,7 +97,8 @@ namespace DataAccess.Migrations
                 {
                     SeatId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ScreeningRoomId = table.Column<int>(type: "int", nullable: false)
+                    ScreeningRoomId = table.Column<int>(type: "int", nullable: false),
+                    IsOccupied = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
