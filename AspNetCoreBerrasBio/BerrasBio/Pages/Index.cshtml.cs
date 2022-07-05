@@ -29,7 +29,7 @@ namespace BerrasBio.Pages
         }
         public IActionResult OnPost()
         {
-            return RedirectToPage("Purchase", ScreeningModel); // usch äckligt
+            return RedirectToPage("Purchase", ScreeningModel);
         }
     }
 }

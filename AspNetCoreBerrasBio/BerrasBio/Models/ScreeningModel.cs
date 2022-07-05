@@ -5,6 +5,7 @@ namespace BerrasBio.Models
     public class ScreeningModel
     {
         public int ScreeningId { get; set; }
+        public DateTime ScreeningDate { get; set; }
         public string MovieName { get; set; }
         public string Description { get; set; }
         public int Runtime { get; set; }

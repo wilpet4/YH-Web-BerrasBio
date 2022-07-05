@@ -67,18 +67,6 @@ namespace Core
             db.SaveChanges();
             db.Add(new Movie
             {
-                Name = "Belfast",
-                Description = "A young boy and his working-class Belfast family experience the tumultuous late 1960s.",
-                Runtime = 98,
-                AgeRestriction = 11,
-                Genres = new List<Genre>
-                {
-                    new Genre { GenreName = "Drama" }
-                },
-                Director = new Director { Name = "Kenneth Branagh" }
-            });
-            db.SaveChanges();
-            db.Add(new Movie
             {
                 Name = "Clifford the Big Red Dog",
                 Description = "A young girl's love for a tiny puppy named Clifford makes the dog grow to an enormous size.",
@@ -95,18 +83,15 @@ namespace Core
             db.SaveChanges();
             db.Add(new Movie
             {
-                Name = "Jujutsu Kaisen 0: The Movie",
-                Description = "Yuta Okkotsu, a high schooler who gains control of an extremely powerful Cursed Spirit and gets enrolled in " +
-                              "the Tokyo Prefectural Jujutsu High School by Jujutsu Sorcerers to help him control his power and keep an eye on him.",
-                Runtime = 112,
+                Name = "Belfast",
+                Description = "A young boy and his working-class Belfast family experience the tumultuous late 1960s.",
+                Runtime = 98,
                 AgeRestriction = 11,
                 Genres = new List<Genre>
                 {
-                    new Genre { GenreName = "Anime" },
-                    db.Genres.Where(x => x.GenreName == "Action").First(),
-                    db.Genres.Where(x => x.GenreName == "Fantasy").First()
+                    new Genre { GenreName = "Drama" }
                 },
-                Director = new Director { Name = "Seong-Hu Park" }
+                Director = new Director { Name = "Kenneth Branagh" }
             });
             db.SaveChanges();
             db.Add(new Movie
@@ -123,40 +108,6 @@ namespace Core
                 Director = new Director { Name = "Alex Garland" }
             });
             db.SaveChanges();
-            db.Add(new Movie
-            {
-                Name = "Sonic the Hedgehog 2",
-                Description = "When the manic Dr Robotnik returns to Earth with a new ally, Knuckles the Echidna, " +
-                              "Sonic and his new friend Tails is all that stands in their way.",
-                Runtime = 122,
-                AgeRestriction = 7,
-                Genres = new List<Genre>
-                {
-                    db.Genres.Where(x => x.GenreName == "Action").First(),
-                    db.Genres.Where(x => x.GenreName == "Adventure").First(),
-                    db.Genres.Where(x => x.GenreName == "Comedy").First(),
-                    db.Genres.Where(x => x.GenreName == "Family").First()
-                },
-                Director = new Director { Name = "Jeff Fowler" }
-            });
-            db.SaveChanges();
-            db.Add(new Movie
-            {
-                Name = "The Lost City",
-                Description = "A reclusive romance novelist on a book tour with her cover model gets swept " +
-                              "up in a kidnapping attempt that lands them both in a cutthroat jungle adventure.",
-                Runtime = 112,
-                AgeRestriction = 11,
-                Genres = new List<Genre>
-                {
-                    db.Genres.Where(x => x.GenreName == "Action").First(),
-                    db.Genres.Where(x => x.GenreName == "Adventure").First(),
-                    db.Genres.Where(x => x.GenreName == "Comedy").First(),
-                    new Genre { GenreName = "Romance" }
-                },
-                Director = new Director { Name = "Aaron Nee, Adam Nee" } // Typiskt att en film skulle ha dubbla regissörer.
-            });
-            db.SaveChanges();
             #endregion
             #region Screenings
             db.Add(new Screening
@@ -164,63 +115,48 @@ namespace Core
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 1).First(),
                 IsRecurring = true,
-                Price = 129
+                Price = 129,
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0)
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 2).First(),
                 IsRecurring = true,
-                Price = 129
+                Price = 129,
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 10, 30, 0)
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 3).First(),
                 IsRecurring = true,
-                Price = 129
+                Price = 129,
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13, 30, 0)
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 4).First(),
                 IsRecurring = true,
-                Price = 129
+                Price = 129,
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 30, 0)
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 5).First(),
                 IsRecurring = true,
-                Price = 129
+                Price = 129,
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 18, 30, 0)
             });
             db.Add(new Screening
             {
                 ScreeningRoom = db.ScreeningRooms.First(),
                 Movie = db.Movies.Where(x => x.MovieId == 6).First(),
                 IsRecurring = true,
-                Price = 129
-            });
-            db.Add(new Screening
-            {
-                ScreeningRoom = db.ScreeningRooms.First(),
-                Movie = db.Movies.Where(x => x.MovieId == 7).First(),
-                IsRecurring = true,
-                Price = 129
-            });
-            db.Add(new Screening
-            {
-                ScreeningRoom = db.ScreeningRooms.First(),
-                Movie = db.Movies.Where(x => x.MovieId == 8).First(),
-                IsRecurring = true,
-                Price = 129
-            });
-            db.Add(new Screening
-            {
-                ScreeningRoom = db.ScreeningRooms.First(),
-                Movie = db.Movies.Where(x => x.MovieId == 9).First(),
-                IsRecurring = true,
-                Price = 129
+                Price = 129,
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 45, 0)
             });
             db.SaveChanges();
             #endregion
@@ -257,7 +193,7 @@ namespace Core
         public void PrintReceipt(in Screening screening, in Seat seat)
         {
             // ..\
-            string cleanDate = DateTime.Now.Date.ToString().Replace(':', '.');
+            string cleanDate = DateTime.Now.ToString().Replace(':', '.');
             Receipt receipt = new Receipt { Screening = screening };
             string fileName = $"{cleanDate}.{screening.ScreeningId}.{receipt.ReceiptId}";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
@@ -267,7 +203,7 @@ namespace Core
             }
             using (StreamWriter sw = File.CreateText($@"{basePath}\Receipts\{fileName}.txt"))
             {
-                sw.WriteLine($"Movie: {screening.Movie.Name}");
+                sw.WriteLine($"Movie: {screening.Movie.Name}, {screening.DateTime:f}");
                 sw.WriteLine($"Room: {screening.ScreeningRoomId}");
                 sw.WriteLine($"Date of Purchase: {cleanDate}");
                 sw.WriteLine($"Identification: {fileName}");

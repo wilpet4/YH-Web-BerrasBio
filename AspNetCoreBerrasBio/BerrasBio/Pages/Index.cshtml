@@ -29,6 +29,7 @@
                         }
                     </td>
                     <td>@screening.Movie.AgeRestriction</td>
+                    <td>@screening.DateTime.ToString("HH:mm")</td>
                     <td>
                             <form method="post">
                             <input type="hidden" asp-for="ScreeningModel.ScreeningId" value="@screening.ScreeningId"/>
@@ -39,6 +40,7 @@
                             <input type="hidden" asp-for="ScreeningModel.Genres" value="@screening.GenresAsString"/>
                             <input type="hidden" asp-for="ScreeningModel.DirectorName" value="@screening.Movie.Director.Name"/>
                             <input type="hidden" asp-for="ScreeningModel.Price" value="@screening.Price"/>
+                            <input type="hidden" asp-for="ScreeningModel.ScreeningDate" value="@screening.DateTime"/>
                             <button type="submit">Köp Biljett</button>
                             </form>
                     </td>
