@@ -67,7 +67,6 @@ namespace Core
             db.SaveChanges();
             db.Add(new Movie
             {
-            {
                 Name = "Clifford the Big Red Dog",
                 Description = "A young girl's love for a tiny puppy named Clifford makes the dog grow to an enormous size.",
                 Runtime = 96,
@@ -175,6 +174,7 @@ namespace Core
         public List<Screening> GetAllScreeningsWithRelationData()
         {
             var query = (from s in DbSingleton.Instance.Screenings
+                         orderby s.DateTime ascending
                          select s).Include(s => s.ScreeningRoom) .Include(m => m.Movie).ThenInclude(g => g.Genres).Include(m => m.Movie).ThenInclude(d =>d.Director);
             if (query.Any() == false)
             {
