@@ -28,7 +28,7 @@ namespace BerrasBio.Pages
                 {
                     seat.IsOccupied = true;
                     logic.PrintReceipt(CurrentScreening, seat);
-                    // Nån sorts confirm-grej här.
+                    return RedirectToPage("Confirmation", new { ScreeningModel.ScreeningDate, ScreeningModel.MovieName, ScreeningModel.Price, seat.SeatId});
                 }
             }
             return RedirectToPage("Index");

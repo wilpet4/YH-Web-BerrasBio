@@ -1,0 +1,10 @@
+﻿@page
+@using Core
+@model BerrasBio.Pages.ConfirmationModel
+@{
+    Logic logic = new Logic();
+}
+<div class="text-center">
+    <h1>Ditt köp är klargjort!</h1>
+    Du finner din biljett i: @logic.ReceiptPath()
+</div>

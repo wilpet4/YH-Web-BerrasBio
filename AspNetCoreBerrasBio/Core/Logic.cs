@@ -212,5 +212,18 @@ namespace Core
             DbSingleton.Instance.Receipts.Add(receipt);
             DbSingleton.Instance.SaveChanges();
         }
+        public string ReceiptPath()
+        {
+            string basePath = $"{AppDomain.CurrentDomain.BaseDirectory}/Receipts";
+            return basePath;
+        }
+        public void ResetSeatsForScreening(in Screening screening)
+        {
+            foreach (var seat in screening.ScreeningRoom.Seats)
+            {
+                seat.IsOccupied = false;
+            }
+            DbSingleton.Instance.SaveChanges();
+        }
     }
 }
