@@ -92,26 +92,6 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Seats",
-                columns: table => new
-                {
-                    SeatId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ScreeningRoomId = table.Column<int>(type: "int", nullable: false),
-                    IsOccupied = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Seats", x => x.SeatId);
-                    table.ForeignKey(
-                        name: "FK_Seats_ScreeningRooms_ScreeningRoomId",
-                        column: x => x.ScreeningRoomId,
-                        principalTable: "ScreeningRooms",
-                        principalColumn: "ScreeningRoomId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "GenreMovie",
                 columns: table => new
                 {
@@ -143,7 +123,9 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsRecurring = table.Column<bool>(type: "bit", nullable: false),
                     ScreeningRoomId = table.Column<int>(type: "int", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
                     MovieId = table.Column<int>(type: "int", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
@@ -183,6 +165,26 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Seats",
+                columns: table => new
+                {
+                    SeatId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ScreeningId = table.Column<int>(type: "int", nullable: false),
+                    IsOccupied = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Seats", x => x.SeatId);
+                    table.ForeignKey(
+                        name: "FK_Seats_Screenings_ScreeningId",
+                        column: x => x.ScreeningId,
+                        principalTable: "Screenings",
+                        principalColumn: "ScreeningId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_GenreMovie_MoviesMovieId",
                 table: "GenreMovie",
@@ -214,9 +216,9 @@ namespace DataAccess.Migrations
                 column: "ScreeningRoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Seats_ScreeningRoomId",
+                name: "IX_Seats_ScreeningId",
                 table: "Seats",
-                column: "ScreeningRoomId");
+                column: "ScreeningId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

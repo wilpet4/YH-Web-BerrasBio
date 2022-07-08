@@ -137,6 +137,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScreeningId"), 1L, 1);
 
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
@@ -193,12 +196,12 @@ namespace DataAccess.Migrations
                     b.Property<bool>("IsOccupied")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ScreeningRoomId")
+                    b.Property<int>("ScreeningId")
                         .HasColumnType("int");
 
                     b.HasKey("SeatId");
 
-                    b.HasIndex("ScreeningRoomId");
+                    b.HasIndex("ScreeningId");
 
                     b.ToTable("Seats");
                 });
@@ -272,13 +275,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Models.Seat", b =>
                 {
-                    b.HasOne("DataAccess.Models.ScreeningRoom", "ScreeningRoom")
+                    b.HasOne("DataAccess.Models.Screening", "Screening")
                         .WithMany("Seats")
-                        .HasForeignKey("ScreeningRoomId")
+                        .HasForeignKey("ScreeningId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ScreeningRoom");
+                    b.Navigation("Screening");
                 });
 
             modelBuilder.Entity("GenreMovie", b =>
@@ -306,7 +309,7 @@ namespace DataAccess.Migrations
                     b.Navigation("DirectedMovies");
                 });
 
-            modelBuilder.Entity("DataAccess.Models.ScreeningRoom", b =>
+            modelBuilder.Entity("DataAccess.Models.Screening", b =>
                 {
                     b.Navigation("Seats");
                 });

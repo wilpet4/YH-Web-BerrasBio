@@ -7,6 +7,7 @@ namespace DataAccess.Models
     {
         public Screening()
         {
+            Seats = new List<Seat>();
             if (IsRecurring == true)
             {
                 DateTime = DateTime.Now;
@@ -16,6 +17,8 @@ namespace DataAccess.Models
         public bool IsRecurring { get; set; }
         public int ScreeningRoomId { get; set; }
         [Required] public ScreeningRoom ScreeningRoom { get; set; }
+        [Required] public int Capacity { get; set; }
+        public ICollection<Seat> Seats { get; set; }
         public int MovieId { get; set; }
         [Required] public Movie Movie { get; set; }
         public DateTime DateTime { get; set; }
@@ -28,6 +31,22 @@ namespace DataAccess.Models
                     result += $"{genre.GenreName} ";
                 }
                 return result;
-            } }
+            } 
+        }
+        [NotMapped] public int AvailableSeats
+        {
+            get
+            {
+                int result = 0;
+                foreach (Seat seat in Seats)
+                {
+                    if (seat.IsOccupied == false)
+                    {
+                        result++;
+                    }
+                }
+                return result;
+            }
+        }
     }
 }

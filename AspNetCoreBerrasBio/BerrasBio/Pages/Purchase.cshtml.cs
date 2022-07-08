@@ -22,7 +22,7 @@ namespace BerrasBio.Pages
             CurrentScreening = logic.GetScreeningByIndex(ScreeningModel.ScreeningId);
             if (CurrentScreening != null)
             {
-                var seats = logic.GetAllAvailableSeatsFromRoom(CurrentScreening.ScreeningRoom);
+                var seats = logic.GetAllAvailableSeatsFromScreening(CurrentScreening);
                 Seat? seat = seats.ElementAt(random.Next(0, seats.Count));
                 if (seat != null)
                 {

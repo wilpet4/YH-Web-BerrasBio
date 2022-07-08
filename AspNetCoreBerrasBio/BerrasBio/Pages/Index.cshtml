@@ -17,12 +17,15 @@
                 <th>Genre</th>
                 <th>Åldersgräns</th>
                 <th>Tid</th>
+                <th>Platser</th>
             </tr>
         </thead>
         <tbody style="background-color: #f0f8ff">
             @foreach (Screening screening in Model.screenings)
             {
-                <tr class="mv">
+                if (screening.AvailableSeats == 0)
+                {
+                    <tr class="mv-empty">
                     <td class="movie-name">@screening.Movie.Name</td>
                     <td>@foreach (var genre in screening.Movie.Genres)
                         {
@@ -31,6 +34,22 @@
                     </td>
                     <td>@screening.Movie.AgeRestriction</td>
                     <td>@screening.DateTime.ToString("HH:mm")</td>
+                    <td>@screening.AvailableSeats</td>
+                    <td>Slutsåld</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="mv">
+                    <td class="movie-name">@screening.Movie.Name</td>
+                    <td>@foreach (var genre in screening.Movie.Genres)
+                        {
+                            <text>@genre.GenreName </text>
+                        }
+                    </td>
+                    <td>@screening.Movie.AgeRestriction</td>
+                    <td>@screening.DateTime.ToString("HH:mm")</td>
+                    <td>@screening.AvailableSeats</td>
                     <td>
                             <form method="post">
                             <input type="hidden" asp-for="ScreeningModel.ScreeningId" value="@screening.ScreeningId"/>
@@ -45,7 +64,8 @@
                             <button type="submit">Köp Biljett</button>
                             </form>
                     </td>
-                </tr>
+                    </tr>
+                }
             }
         </tbody>
     </table>

@@ -25,6 +25,10 @@ body {
     
 }
 
+.mv-empty td{
+    background-color: indianred;
+}
+
 .expandable{
 
 }

@@ -13,10 +13,6 @@ namespace Core
             db.Add(c);
             ScreeningRoom sr = new ScreeningRoom { Capacity = 50, Cinema = c };
             db.Add(sr);
-            for (int i = 0; i < sr.Capacity; i++)
-            {
-                sr.Seats.Add(new Seat());
-            }
             #region Movies
             db.Add(new Movie
             {
@@ -115,7 +111,8 @@ namespace Core
                 Movie = db.Movies.Where(x => x.MovieId == 1).First(),
                 IsRecurring = true,
                 Price = 129,
-                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0)
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0),
+                Capacity = sr.Capacity
             });
             db.Add(new Screening
             {
@@ -123,7 +120,8 @@ namespace Core
                 Movie = db.Movies.Where(x => x.MovieId == 2).First(),
                 IsRecurring = true,
                 Price = 129,
-                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 10, 30, 0)
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 10, 30, 0),
+                Capacity = sr.Capacity
             });
             db.Add(new Screening
             {
@@ -131,7 +129,8 @@ namespace Core
                 Movie = db.Movies.Where(x => x.MovieId == 3).First(),
                 IsRecurring = true,
                 Price = 129,
-                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13, 30, 0)
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13, 30, 0),
+                Capacity = sr.Capacity
             });
             db.Add(new Screening
             {
@@ -139,7 +138,8 @@ namespace Core
                 Movie = db.Movies.Where(x => x.MovieId == 4).First(),
                 IsRecurring = true,
                 Price = 129,
-                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 30, 0)
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 30, 0),
+                Capacity = sr.Capacity
             });
             db.Add(new Screening
             {
@@ -147,7 +147,8 @@ namespace Core
                 Movie = db.Movies.Where(x => x.MovieId == 5).First(),
                 IsRecurring = true,
                 Price = 129,
-                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 18, 30, 0)
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 18, 30, 0),
+                Capacity = sr.Capacity
             });
             db.Add(new Screening
             {
@@ -155,10 +156,19 @@ namespace Core
                 Movie = db.Movies.Where(x => x.MovieId == 6).First(),
                 IsRecurring = true,
                 Price = 129,
-                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 45, 0)
+                DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 45, 0),
+                Capacity = sr.Capacity
             });
             db.SaveChanges();
             #endregion
+            foreach (Screening sc in db.Screenings)
+            {
+                for (int i = 0; i < sc.Capacity; i++)
+                {
+                    sc.Seats.Add(new Seat());
+                }
+            }
+            db.SaveChanges();
         }
         public List<Movie> GetAllMoviesWithRelationData()
         {
@@ -175,18 +185,18 @@ namespace Core
         {
             var query = (from s in DbSingleton.Instance.Screenings
                          orderby s.DateTime ascending
-                         select s).Include(s => s.ScreeningRoom) .Include(m => m.Movie).ThenInclude(g => g.Genres).Include(m => m.Movie).ThenInclude(d =>d.Director);
+                         select s).Include(s => s.Seats).Include(s => s.ScreeningRoom).Include(m => m.Movie).ThenInclude(g => g.Genres).Include(m => m.Movie).ThenInclude(d =>d.Director);
             if (query.Any() == false)
             {
                 return new List<Screening>();
             }
             return query.ToList();
         }
-        public List<Seat> GetAllAvailableSeatsFromRoom(in ScreeningRoom room)
+        public List<Seat> GetAllAvailableSeatsFromScreening(in Screening screening)
         {
-            int roomId = room.ScreeningRoomId;
+            int screeningId = screening.ScreeningId;
             var query = (from s in DbSingleton.Instance.Seats
-                         where s.ScreeningRoomId == roomId && s.IsOccupied == false
+                         where s.ScreeningId == screeningId && s.IsOccupied == false
                          select s);
             return query.ToList();
         }
@@ -219,7 +229,7 @@ namespace Core
         }
         public void ResetSeatsForScreening(in Screening screening)
         {
-            foreach (var seat in screening.ScreeningRoom.Seats)
+            foreach (var seat in screening.Seats)
             {
                 seat.IsOccupied = false;
             }
