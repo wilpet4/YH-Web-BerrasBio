@@ -9,6 +9,8 @@ namespace BerrasBio.Pages
     public class PurchaseModel : PageModel
     {
         [BindProperty(SupportsGet = true)]
+        public ConfirmedOrderModel ConfirmedOrderModel { get; set; }
+        [BindProperty(SupportsGet = true)]
         public ScreeningModel ScreeningModel { get; set; }
         public Screening? CurrentScreening { get; set; }
         Logic logic = new Logic();
@@ -18,18 +20,10 @@ namespace BerrasBio.Pages
         }
         public IActionResult OnPost()
         {
-            Random random = new Random();
             CurrentScreening = logic.GetScreeningByIndex(ScreeningModel.ScreeningId);
             if (CurrentScreening != null)
             {
-                var seats = logic.GetAllAvailableSeatsFromScreening(CurrentScreening);
-                Seat? seat = seats.ElementAt(random.Next(0, seats.Count));
-                if (seat != null)
-                {
-                    seat.IsOccupied = true;
-                    logic.PrintReceipt(CurrentScreening, seat);
-                    return RedirectToPage("Confirmation", new { ScreeningModel.ScreeningDate, ScreeningModel.MovieName, ScreeningModel.Price, seat.SeatId});
-                }
+                return RedirectToPage("Confirmation", ConfirmedOrderModel);
             }
             return RedirectToPage("Index");
         }

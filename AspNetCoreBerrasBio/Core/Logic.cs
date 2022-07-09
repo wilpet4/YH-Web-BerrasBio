@@ -179,7 +179,8 @@ namespace Core
         }
         public Screening GetScreeningByIndex(in int index)
         {
-            return (Screening)DbSingleton.Instance.Screenings.Include(x => x.Movie).ToList().First();
+            int id = index;
+            return (Screening)DbSingleton.Instance.Screenings.Include(x => x.Movie).Where(s => s.ScreeningId == id).First();
         }
         public List<Screening> GetAllScreeningsWithRelationData()
         {
@@ -224,7 +225,7 @@ namespace Core
         }
         public string ReceiptPath()
         {
-            string basePath = $"{AppDomain.CurrentDomain.BaseDirectory}/Receipts";
+            string basePath = $"{AppDomain.CurrentDomain.BaseDirectory}Receipts";
             return basePath;
         }
         public void ResetSeatsForScreening(in Screening screening)
