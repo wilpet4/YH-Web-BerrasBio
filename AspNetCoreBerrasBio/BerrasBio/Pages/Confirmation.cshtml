@@ -1,10 +1,17 @@
 ﻿@page
 @using Core
+@using DataAccess
+@using DataAccess.Models
 @model BerrasBio.Pages.ConfirmationModel
 @{
     Logic logic = new Logic();
+    Screening screening = Model.ConfirmedOrder.Screening;
 }
 <div class="text-center">
     <h1>Ditt köp är klargjort!</h1>
+    @screening.Movie.Name
+    @screening.DateTime.ToString("HH:mm")
+    Antal biljetter: @Model.ConfirmedOrder.TicketAmount
     Du finner din biljett i: @logic.ReceiptPath()
+    <button type="button">Till Stardsida</button>
 </div>
