@@ -8,10 +8,6 @@ namespace DataAccess.Models
         public Screening()
         {
             Seats = new List<Seat>();
-            if (IsRecurring == true)
-            {
-                DateTime = DateTime.Now;
-            }
         }
         public int ScreeningId { get; set; }
         public bool IsRecurring { get; set; }

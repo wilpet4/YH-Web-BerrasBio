@@ -1,13 +1,15 @@
 ﻿@page
 @using DataAccess.Models
+@using System.Globalization
 @model IndexModel
 @{
-    List<Genre> genres = new List<Genre>();
+    DateTime dateTime = new DateTime();
     ViewData["Title"] = "Index";
 }
 
 <div class="text-center">
     <h1 class="display-4">Välkommen Till Berras Bio!</h1>
+    <h2 class="display-6">Aktuella visningar för imorgon: @DateTime.Now.AddDays(1).ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("sv-SE"))</h2>
 </div>
 <div class="text-center"> 
         <table class="table table-bordered">

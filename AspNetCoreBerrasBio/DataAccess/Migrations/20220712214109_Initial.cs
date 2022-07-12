@@ -152,7 +152,8 @@ namespace DataAccess.Migrations
                     ReceiptId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ReceiptDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ScreeningId = table.Column<int>(type: "int", nullable: false)
+                    ScreeningId = table.Column<int>(type: "int", nullable: false),
+                    SeatNr = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

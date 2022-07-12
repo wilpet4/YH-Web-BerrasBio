@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(BerrasBioContext))]
-    [Migration("20220708214552_Initial")]
+    [Migration("20220712214109_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,6 +122,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ScreeningId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeatNr")
                         .HasColumnType("int");
 
                     b.HasKey("ReceiptId");

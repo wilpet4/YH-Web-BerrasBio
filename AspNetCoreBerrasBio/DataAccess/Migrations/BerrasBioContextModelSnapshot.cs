@@ -122,6 +122,9 @@ namespace DataAccess.Migrations
                     b.Property<int>("ScreeningId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SeatNr")
+                        .HasColumnType("int");
+
                     b.HasKey("ReceiptId");
 
                     b.HasIndex("ScreeningId");

@@ -33,12 +33,13 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<BerrasBioContext>();
+    Logic logic = new Logic();
     if (context.Database.CanConnect() == false)
     {
         context.Database.Migrate();
-        Logic logic = new Logic();
         logic.GenerateSampleData();
     }
+    logic.SetScreeningDates();
 }
 
 app.UseHttpsRedirection();

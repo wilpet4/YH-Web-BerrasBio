@@ -170,6 +170,27 @@ namespace Core
             }
             db.SaveChanges();
         }
+        public void SetScreeningDates() // Gör så att alla Screenings med IsRecurring uppdateras
+        {                               // så man alltid bokar biljetten till nästa dag.
+            var db = DbSingleton.Instance;
+            var recurringScreenings = db.Screenings.Where(s => s.IsRecurring == true).ToList();
+            foreach (Screening screening in recurringScreenings)
+            {
+                if (screening.DateTime.Day == DateTime.Now.AddDays(1).Day) return;
+                var oldDate = screening.DateTime;
+                var newDate = new DateTime(
+                    DateTime.Now.Year, 
+                    DateTime.Now.Month, 
+                    DateTime.Now.AddDays(1).Day,
+                    oldDate.Hour,
+                    oldDate.Minute,
+                    oldDate.Second);
+
+                screening.DateTime = newDate;
+                db.Update(screening);
+            }
+            db.SaveChanges();
+        }
         public List<Movie> GetAllMoviesWithRelationData()
         {
             var query = (from m in DbSingleton.Instance.Movies
@@ -201,11 +222,11 @@ namespace Core
                          select s);
             return query.ToList();
         }
-        public void PrintReceipt(in Screening screening, in Seat seat)
+        public void PrintReceipt(in Screening screening, in Seat seat, int seatNr)
         {
             // ..\
-            string cleanDate = DateTime.Now.ToString().Replace(':', '.');
-            Receipt receipt = new Receipt { Screening = screening };
+            string cleanDate = DateTime.Now.ToString().Replace(':', '.'); // Eftersom man inte får använda ':' i filnamn.
+            Receipt receipt = new Receipt { Screening = screening, SeatNr = seatNr };
             string fileName = $"{cleanDate}.{screening.ScreeningId}.{receipt.ReceiptId}";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             if (Directory.Exists($@"{basePath}\Receipts") == false)
@@ -214,10 +235,12 @@ namespace Core
             }
             using (StreamWriter sw = File.CreateText($@"{basePath}\Receipts\{fileName}.txt"))
             {
-                sw.WriteLine($"Movie: {screening.Movie.Name}, {screening.DateTime:f}");
+                sw.WriteLine($"Movie: {screening.Movie.Name}");
+                sw.WriteLine($"Date: {screening.DateTime}");
                 sw.WriteLine($"Room: {screening.ScreeningRoomId}");
+                sw.WriteLine($"Seat: {seatNr}");
+                sw.WriteLine($"Price: {screening.Price}kr");
                 sw.WriteLine($"Date of Purchase: {cleanDate}");
-                sw.WriteLine($"Identification: {fileName}");
             }
             seat.IsOccupied = true;
             DbSingleton.Instance.Receipts.Add(receipt);

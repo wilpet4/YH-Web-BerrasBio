@@ -1,5 +1,6 @@
 using BerrasBio.Models;
 using Core;
+using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -22,9 +23,10 @@ namespace BerrasBio.Pages
                 for (int i = 0; i < ConfirmedOrder.TicketAmount; i++) // Kanske inte göra allt detta i front-end.
                 {
                     var screening = logic.GetScreeningByIndex(ConfirmedOrder.ScreeningId);
-                    var seats = logic.GetAllAvailableSeatsFromScreening(screening);
-                    var seat = seats[random.Next(0, seats.Count)];
-                    logic.PrintReceipt(screening, seat);
+                    List<Seat> seats = logic.GetAllAvailableSeatsFromScreening(screening);
+                    int seatNr = random.Next(0, seats.Count);
+                    Seat seat = seats[seatNr];
+                    logic.PrintReceipt(screening, seat, seatNr);
                 }
             }
             return Page();
