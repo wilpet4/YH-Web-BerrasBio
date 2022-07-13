@@ -27,12 +27,8 @@ namespace DataAccess.Models
             var builder = new ConfigurationBuilder()
             .AddJsonFile($"appsettings.json", true, true);
 
-            //string connectionString =
-            //builder.Build().GetConnectionString("DefaultConnection"); // Returnerar null för nån jävla anledning.
-
             if (optionsBuilder.IsConfigured == false)
             {
-                //optionsBuilder.UseSqlServer(connectionString);
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BerrasBio_WilliamPetrik;Integrated Security=True");
             }
         }

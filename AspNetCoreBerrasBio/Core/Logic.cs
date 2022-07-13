@@ -207,7 +207,12 @@ namespace Core
         {
             var query = (from s in DbSingleton.Instance.Screenings
                          orderby s.DateTime ascending
-                         select s).Include(s => s.Seats).Include(s => s.ScreeningRoom).Include(m => m.Movie).ThenInclude(g => g.Genres).Include(m => m.Movie).ThenInclude(d =>d.Director);
+                         select s)
+                         .Include(s => s.Seats)
+                         .Include(s => s.ScreeningRoom)
+                         .Include(m => m.Movie).ThenInclude(g => g.Genres)
+                         .Include(m => m.Movie).ThenInclude(d =>d.Director);
+
             if (query.Any() == false)
             {
                 return new List<Screening>();
@@ -222,12 +227,24 @@ namespace Core
                          select s);
             return query.ToList();
         }
-        public void PrintReceipt(in Screening screening, in Seat seat, int seatNr)
+        public void OrderTickets(int ticketAmount, int screeningId)
+        {
+            Random random = new Random();
+            for (int i = 0; i < ticketAmount; i++)
+            {
+                var screening = GetScreeningByIndex(screeningId);
+                List<Seat> seats = GetAllAvailableSeatsFromScreening(screening);
+                int seatNr = random.Next(0, seats.Count);
+                Seat seat = seats[seatNr];
+                PrintReceipt(screening, seat, seatNr);
+            }
+        }
+        private void PrintReceipt(in Screening screening, in Seat seat, int seatNr)
         {
             // ..\
             string cleanDate = DateTime.Now.ToString().Replace(':', '.'); // Eftersom man inte får använda ':' i filnamn.
-            Receipt receipt = new Receipt { Screening = screening, SeatNr = seatNr };
-            string fileName = $"{cleanDate}.{screening.ScreeningId}.{receipt.ReceiptId}";
+            Receipt receipt = new Receipt { Screening = screening, SeatNr = seatNr, ReceiptDate = DateTime.Now};
+            string fileName = $"{cleanDate}.{screening.ScreeningId}.{seat.SeatId}.{seatNr}.{receipt.ReceiptId}"; // Långt unikt filnamn.
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             if (Directory.Exists($@"{basePath}\Receipts") == false)
             {

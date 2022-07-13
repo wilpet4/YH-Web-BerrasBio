@@ -8,10 +8,11 @@
     Screening screening = Model.ConfirmedOrder.Screening;
 }
 <div class="text-center">
-    <h1>Ditt köp är klargjort!</h1>
-    @screening.Movie.Name
-    @screening.DateTime.ToString("HH:mm")
-    Antal biljetter: @Model.ConfirmedOrder.TicketAmount
-    Du finner din biljett i: @logic.ReceiptPath()
-    <button type="button">Till Stardsida</button>
+    <h1>Ditt köp är klargjort!</h1>  
+</div>
+<div>
+    <h2 style="font-size: 24px">@screening.Movie.Name</h2>
+    <h2 style="font-size: 22px">@screening.DateTime</h2>
+    <h3 style="font-size: 18px">Antal biljetter: @Model.ConfirmedOrder.TicketAmount</h3>
+    <h4 style="font-size: 16px">Du finner din biljett i: @logic.ReceiptPath()</h4>
 </div>

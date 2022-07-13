@@ -21,7 +21,7 @@ namespace BerrasBio.Pages
         public IActionResult OnPost()
         {
             CurrentScreening = logic.GetScreeningByIndex(ScreeningModel.ScreeningId);
-            if (CurrentScreening != null)
+            if (CurrentScreening != null && ConfirmedOrderModel.TicketAmount <= logic.GetAllAvailableSeatsFromScreening(CurrentScreening).Count)
             {
                 return RedirectToPage("Confirmation", ConfirmedOrderModel);
             }

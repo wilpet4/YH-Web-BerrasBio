@@ -15,7 +15,7 @@
     <h2>@Model.ScreeningModel.ScreeningDate</h2>
     <form method="post">
         <input type="hidden" asp-for="ConfirmedOrderModel.ScreeningId" value="@Model.ScreeningModel.ScreeningId"/>
-        <input type="number" asp-for="ConfirmedOrderModel.TicketAmount" min="1" max="9" placeholder="1"/>
+        <input type="number" asp-for="ConfirmedOrderModel.TicketAmount" min="1" max="50" placeholder="1"/>
     <h3>@Model.ScreeningModel.Price kr/st<button type="submit">Confirm Purchase</button></h3>
     </form>
 </div>
