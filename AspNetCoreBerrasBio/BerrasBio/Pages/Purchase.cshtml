@@ -5,17 +5,23 @@
 @{
     ViewData["Title"] = "Purchase";
 }
-<div class="text-center">
-    <h2>@Model.ScreeningModel.MovieName</h2>
-    <h2>@Model.ScreeningModel.Description</h2>
-    <h2>@Model.ScreeningModel.Runtime</h2>
-    <h2>@Model.ScreeningModel.AgeRestriction</h2>
-    <h2>@Model.ScreeningModel.Genres</h2>
-    <h2>@Model.ScreeningModel.DirectorName</h2>
-    <h2>@Model.ScreeningModel.ScreeningDate</h2>
+<div>
+    <h1>@Model.ScreeningModel.MovieName</h1>
+    <wbr />
+    <h2 style="font-size: 32px">@Model.ScreeningModel.Description</h2>
+        <wbr />
+    <h3 style="font-size: 24px">Längd: @Model.ScreeningModel.Runtime Minuter</h3>
+        <wbr />
+    <h3 style="font-size: 24px">Åldersgräns: @Model.ScreeningModel.AgeRestriction</h3>
+        <wbr />
+    <h3 style="font-size: 24px">Genre: @Model.ScreeningModel.Genres</h3>
+        <wbr />
+    <h3 style="font-size: 24px">Regissör: @Model.ScreeningModel.DirectorName</h3>
+        <wbr />
+    <h3 style="font-size: 24px">Datum: @Model.ScreeningModel.ScreeningDate</h3>
+        <wbr />
     <form method="post">
         <input type="hidden" asp-for="ConfirmedOrderModel.ScreeningId" value="@Model.ScreeningModel.ScreeningId"/>
-        <input type="number" asp-for="ConfirmedOrderModel.TicketAmount" min="1" max="50" placeholder="1"/>
-    <h3>@Model.ScreeningModel.Price kr/st<button type="submit">Confirm Purchase</button></h3>
+        <h3>@Model.ScreeningModel.Price kr/st <input type="number" asp-for="ConfirmedOrderModel.TicketAmount" min="1" max="50" placeholder="1"/> <button type="submit">Confirm Purchase</button></h3>
     </form>
 </div>
